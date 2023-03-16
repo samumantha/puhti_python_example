@@ -8,4 +8,7 @@
 #SBATCH --partition=test
 
 module load geoconda
-srun python multiprocessing_example.py 
+
+datadir=/appl/data/geo/sentinel/s2_example_data/L2A
+
+srun python multiprocessing_example.py $datadir

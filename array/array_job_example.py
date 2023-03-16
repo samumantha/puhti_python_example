@@ -3,8 +3,8 @@ A simple example Python script how to calculate NDVI for three Sentinel satellit
 with an array job.
 This script handles only ONE file, which is given as parameter to the script.
 
-Author: Johannes Nyman, CSC
-Date: 31.03.2020
+Author: Johannes Nyman, Kylli Ek, Samantha Wittke CSC
+
 """
 import os
 import sys
@@ -43,8 +43,12 @@ def calculateNDVI(red,nir):
     return ndvi
 
 def saveImage(ndvi, sentinel_image_path, input_image):
+    ## Create an output folder to this location, if it does not exist
+    outputdir = 'output'
+    if not os.path.exists(outputdir):
+        os.makedirs(outputdir)
     ## Create output filepath for the image. We use the input name with _NDVI end
-    output_file = os.path.join('output', os.path.basename(sentinel_image_path).replace(".SAFE", "_NDVI.tif"))
+    output_file = os.path.join(outputdir, os.path.basename(sentinel_image_path).replace(".SAFE", "_NDVI.tif"))
     print(f"Saving image: {output_file}")
     ## Copy the metadata (extent, coordinate system etc.) from one of the input bands (red)
     metadata = input_image.profile
