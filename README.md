@@ -46,12 +46,16 @@ Also read the [Puhti batch job system documentation](https://docs.csc.fi/computi
 	
 ## Interactive job
 
-Within an [interactive job](https://docs.csc.fi/computing/running/interactive-usage/) it is possible to run parts of the script and edit the script in between test-runs; so this suits best when still writing the script. Usually it is best to use some smaller test dataset for this.
+Within an [interactive job](https://docs.csc.fi/computing/running/interactive-usage/) it is possible to edit the script in between test-runs; so this suits best when still writing the script. Usually it is best to use some smaller test dataset for this.
+
+### Visual Studio Code
+
+With Visual Studio Code you can also just run parts of the script.
 
 * Start [Visual Studio Code](https://docs.csc.fi/computing/webinterface/vscode/) in [Puhti web interface](https://docs.csc.fi/computing/webinterface/).
     * Open VSCode start page from front page: Apps -> Visual Studio code
     * Choose settings for VSCode:
-        * Project: project_2000745
+        * Project: project_200xxxx
         * Partition: interactive
         * Number of CPU cores: 1
         * Memory: 4 Gb
@@ -73,9 +77,24 @@ Within an [interactive job](https://docs.csc.fi/computing/running/interactive-us
     * Check that there are 3 new GeoTiff files in your work directory in the Files panel of VSCode.
 * Optional, check your results with [QGIS](https://docs.csc.fi/apps/qgis/)
 
+### Jupyter
+
+If you prefer prototyping and testing in a Jupyter Notebook, you can also do that in a similar manner than using Visual Studio Code. Choose **Jupyter** from the Puhti web interface dashboard or the Apps tab in the Puhti webinterface.
+
+### Command line
+
+If you prefer working in the terminal, you can also start an interactive job there by starting a compute node shell directly from Tools tab in Puhti webinterface. Choose settings for the interactive session:
+* Project: project_200xxxx
+* Number of CPU cores: 1
+* Memory: 4 Gb
+* Local disk: 0
+* Time: 2:00:00
+
+You can also start an [interactive session](https://docs.csc.fi/computing/running/interactive-usage/) by starting a login node shell from Tools tab in Puhti webinterface or by connecting to Puhti via ssh connection with `sinteractive --account project_200xxxx --cores 1 --time 02:00:00 --mem 4G --tmp 0`.
+
 
 ## Serial job
-For simple 1 core batch job, use the same Python-script as for interactive working.
+For simple 1 core batch job, use the same Python-script as for interactive working. Now we have to move to the terminal.
 
 * Open [serial/single_core_example.sh](erial/serial_batch_job.sh). Where are output and error messages written? How many cores and for how long time are reserved? How much memory? Which partition is used? Which module is used?
 * Submit batch job from **login node shell**
