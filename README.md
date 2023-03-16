@@ -130,7 +130,7 @@ In this case the Python code takes care of dividing the work to 3 processes, one
 * [parallel_multiprocessing/multiprocessing_example.py](parallel_multiprocessing/multiprocessing_example.py)
 	* Note how pool of workers is started and processes divided to workers with `pool.map()`. This replaces the for loop in simple serial job.
 
-* Submit the parallel job to Puhti from SSH terminal
+* Submit the parallel job to Puhti from Puhti login node shell:
 ```
 cd ../parallel_multiprocessing
 sbatch multiprocessing_example.sh
