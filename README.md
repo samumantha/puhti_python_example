@@ -182,7 +182,24 @@ sbatch dask_singlenode.sh
 * Check with `seff` and `sacct` how much time and resources you used?
 
 
+## GNU parallel
+
+GNU parallel can help parallelizing a script which otherwise is not parallelized. In this example we want to run the same script on three different inputfiles which we can read into a textfile and use as argument to the parallel tool.
+
+This is similar to array jobs (see below), with the advantage that we do not start and need to monitor multiple jobs.
+
+[gnu_parallel/gnu_parallel_example.sh](gnu_parallel/gnu_parallel_example.sh).
+The only difference to serial job is that we do not loop through the directory inside the Python script but let GNU parallel handle that step.
+
+Submit the gnu_parallel job
+```
+cd ../gnu_parallel
+sbatch gnu_parallel_example.sh
+```
+* Check with `seff` and `sacct` how much time and resources you used?
+
 ## Array job
+
 [Array jobs](https://docs.csc.fi/computing/running/array-jobs/) are an easy way of taking advantage of Puhti's capabilities. Array jobs are useful when same code is executed many times for different datasets or with different parameters. In GIS context a typical use case would be to run some model on study area split into multiple files where output from one file doesn't have an impact on result of an other area. 
 
 In the array job example the idea is that the Python script will run one process for every given input file as opposed to running a for loop within the script. That means that the Python script has to read the file to be processed from commandline  argument. 
@@ -205,6 +222,10 @@ sbatch array_job_example.sh
 * Check with `seff` and `sacct` how much time and resources you used?
 
 
+## Notes on many small runs
+
+"Too many files" issues are also often encountered with workflows consisting of thousands of small runs. As a general guide, keep the number of files in a single directory well below one thousand, and organize your data into multiple directories. Also, use command csc-workspaces to monitor that the total number of files in your projects stays well below the limits. If most of the files are temporary, or there simply is too many of them, using the fast local SSD disks in the I/O nodes can solve the problem. You can pack small files into a bigger archive file with the tar command. Most importantly, if there are output files that you do not need, find out how to turn off writing those in the first place.
+
 ## Example benchmarks 
 
 These are just to demonstrate the difference between single core vs. some kind of parallelism. Depending on the issue, some library might be faster or slower.
@@ -216,3 +237,4 @@ These are just to demonstrate the difference between single core vs. some kind o
 | joblib          | 1    | 3               | 01:12      | 86.57%         |
 | dask            | 1    | 3               | 01:22      | 78.46%         |
 | array job       | 3    | 1               | 01:03      | 95.16%         |
+| GNU parallel    | 1    | 3               | xxx        | xxxx           |
