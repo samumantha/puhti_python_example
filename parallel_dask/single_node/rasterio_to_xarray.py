@@ -1,3 +1,5 @@
+### Downloaded from here https://github.com/robintw/XArrayAndRasterio/blob/master/rasterio_to_xarray.py
+
 import rasterio
 import xarray as xr
 import numpy as np
