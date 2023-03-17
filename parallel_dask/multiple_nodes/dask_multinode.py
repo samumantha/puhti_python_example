@@ -26,7 +26,7 @@ from rasterio_to_xarray import xarray_to_rasterio
 ### Declare the folder with input sentinel SAFE folders and output folder
 image_folder = sys.argv[1]
 project_name = sys.argv[2]
-output_folder = 'results'
+output_folder = 'output'
 number_of_workers = 3
 
 ### This is the specifications of one worker SLURM job
@@ -41,7 +41,7 @@ single_worker = {
     "temp_folder" : f"/scratch/{project_name}/dask_slurm/temp"
 }
 
-## Create a results folder to this location
+## Create a output folder to this location
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 

@@ -10,6 +10,9 @@
 ### Load the geoconda module which has Python and Dask installed
 module load geoconda
 
+datadir=/appl/data/geo/sentinel/s2_example_data/L2A
+project=project_2001659
+
 ### Run the Dask example. The directory given to the script hosts 3 Sentinel images
 ### We also give our project name so the master job is able to launch worker jobs
-srun python dask_multinode.py /appl/data/geo/sentinel/s2_example_data/L2A project_2001659
+srun python dask_multinode.py $datadir $project
