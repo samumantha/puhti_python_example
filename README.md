@@ -121,7 +121,11 @@ sacct -j [jobid] -o JobName,elapsed,TotalCPU,reqmem,maxrss,AllocCPUS
 
 
 ## Parallel job
-In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here examples for `multiprocessing`, `joblib` and `dask` are provided. `multiprocessing` package is likely easiest to use and in inlcuded in all Python installations by default. `joblib` provides some more flexibility. `multiprocessing` and `joblib` are suitable for one node (max 40 cores). `dask` is the most versatile has several optins for parallelization, the examples here include both single-node (max 40 cores) and multi-node example.
+In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here examples for `multiprocessing`, `joblib` and `dask` are provided.
+
+### multiprocessing
+
+`multiprocessing` package is likely easiest to use and in inlcuded in all Python installations by default.  `multiprocessing` is suitable for one node (max 40 cores).
 
 * [parallel_multiprocessing/multiprocessing_example.sh](parallel_multiprocessing/multiprocessing_example.sh) batch job file for `multiprocessing`.
 	* `--ntasks=1` + `--cpus-per-task=3` reserves 3 cores - one for each file
@@ -136,6 +140,47 @@ cd ../parallel_multiprocessing
 sbatch multiprocessing_example.sh
 ```
 * Check with `seff` and `sacct` how much time and resources you used?
+
+### joblib
+
+`joblib` provides some more flexibility than multiprocessing. `joblib` is suitable for one node (max 40 cores).
+
+* [parallel_joblib/joblib_example.sh](parallel_joblib/joblib_example.sh) batch job file for `joblib`.
+	* `--ntasks=1` + `--cpus-per-task=3` reserves 3 cores - one for each file
+	* `--mem-per-cpu=4G` reserves memory per core
+
+* [parallel_joblib/joblib_example.py](parallel_joblib/joblib_example.py)
+	* Note how `Parallel` incorporates the for loop of the serial job. 
+
+* Submit the parallel job to Puhti from Puhti login node shell:
+```
+cd ../parallel_joblib
+sbatch joblib_example.sh
+```
+
+* Check with `seff` and `sacct` how much time and resources you used?
+
+### dask 
+
+`dask` is the most versatile has several options for parallelization, the examples here include both single-node (max 40 cores) and multi-node example.
+
+`dask` provides some more flexibility than multiprocessing and joblib. This example uses [delayed functions](https://docs.dask.org/en/latest/delayed.html) from Dask to parallelize the workload. Typically if a workflow contains a for-loop, it can benefit from delayed. [Dask delayed tutorial](https://tutorial.dask.org/03_dask.delayed.html)
+
+* [parallel_dask/dask_singlenode.sh](parallel_dask/dask_singlenode.sh) batch job file for `dask`.
+	* `--ntasks=1` + `--cpus-per-task=3` reserves 3 cores - one for each file
+	* `--mem-per-cpu=4G` reserves memory per core
+
+* [parallel_dask/dask_singlenode.py](parallel_dask/dask_singlenode.py)
+
+
+* Submit the parallel job to Puhti from Puhti login node shell:
+```
+cd ../parallel_dask
+sbatch dask_singlenode.sh
+```
+
+* Check with `seff` and `sacct` how much time and resources you used?
+
 
 ## Array job
 [Array jobs](https://docs.csc.fi/computing/running/array-jobs/) are an easy way of taking advantage of Puhti's capabilities. Array jobs are useful when same code is executed many times for different datasets or with different parameters. In GIS context a typical use case would be to run some model on study area split into multiple files where output from one file doesn't have an impact on result of an other area. 
