@@ -5,25 +5,45 @@ theme: csc-2019
 
 # Using supercomputer Puhti for spatial data processing with Python {.title}
 
-Samantha Wittke, CSC (Geoinformatics specialist)
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+<div class="column">
+![](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
+</div>
+<div class="column">
+<small>
+All material (C) 2022-2023 by CSC -IT Center for Science Ltd.
+This work is licensed under a **Creative Commons Attribution-ShareAlike** 4.0
+Unported License, [http://creativecommons.org/licenses/by-sa/4.0/](http://creativecommons.org/licenses/by-sa/4.0/)
+</small>
+</div>
 
+# CSC - IT center for science
 
-# Goals
+<div class="column">
 
-In the end you hopefully know more about...
+* Non-profit company producing IT services for research and higher education
+* Owned by ministry of education and culture (70%) and higher education institutions (30%)
+* Headquaters in Keilaniemi, Espoo
+* Side offices and supercomputers in Kajaani
+
+</div>
+
+<div class="column">
+
+<p align="center">
+  <img src="./images/kajaani.png" width=95%">
+
+</p>
+
+</div>
+
+# In the end you hopefully know more about...
+
 <br><br>
 
 * What kind of services are offered by CSC and why you might want to use them
-* The supercomputer and how to start using it
-* What spatial data services are available
-
-
-# CSC services introduction
-
-* What services are available and what are they used for?
-* What skills do I need to use the services?
-
+* The supercomputer and how to start using it with Python
+* How and when to use Allas object storage
+* How to get started with your own Pyhton scripts on Puhti
 
 # Why use CSC services?
 
@@ -33,23 +53,28 @@ In the end you hopefully know more about...
 
 # CSC services
 
-[`research.csc.fi/en/service-catalog`](https://research.csc.fi/en/service-catalog)
 <br></br>
 <div class="column">
 **Compute & Analyze**
 
-  - cPouta / ePouta / Rahti -> Cloud 
-  - Puhti / Mahti / LUMI -> Supercomputers
-  - CSC Notebooks
-  - Sensitive Data (SD) services
+* <p style="font-size:40px;"> Webservices, virtual machines in the cloud: `cPouta / ePouta / Rahti` </p>
+* <p style="font-size:40px;"> Heavy computations on the supercomputer: `Puhti / Mahti / LUMI` </p>
+* <p style="font-size:40px;"> Teaching and collaborating: `CSC Notebooks` </p>
+
 </div>
 <div class="column">
 **Store, Share & Publish Data**
 
-  * Allas -> Object storage
-  * Fairdata
-  * Paituli
+* <p style="font-size:40px;"> Project lifetime data storage: `Allas` </p>
+* <p style="font-size:40px;"> Share and publish data: `Fairdata`</p>
+* <p style="font-size:40px;"> Share and publish geospatial data: `Paituli`</p>
 </div>
+
+<br>
+
+<div><p style="font-size:40px;">Working with privacy related data: `Sensitive Data (SD) services`</p></div>
+
+<div><p style="font-size:40px;">&rarr; [CSC service catalog](https://research.csc.fi/en/service-catalog)</p></div>
 
 
 # MyCSC
@@ -65,19 +90,17 @@ In the end you hopefully know more about...
 # Skills needed
 
 <p align="center">
-
 "`You can’t learn everything you need all at once.
 Instead, continually learn and know when to ask for help.`"
-<br> - Aalto Scientific Computing
-
+<br> <small>- Aalto Scientific Computing</small>
 </p>
 
-* Using CSC computing resources: general Linux commands
+* Using CSC computing resources: basic Linux commands
 * Supercomputer
-    * serial & 'embarassingly parallel' tasks: general Linux commands, basic HPCterminology 
+    * serial & 'embarassingly parallel' tasks: basic Linux commands, basic HPC terminology 
     * parallel work: High Performance Computing (HPC), scientific coding
-* Virtual Machines (VM): Linux administration
-* [CSC quick reference](https://docs.csc.fi/img/csc-quick-reference/csc-quick-reference.pdf)
+* Virtual Machines (VM): Linux administration 
+<p>&rarr; [CSC quick reference](https://docs.csc.fi/img/csc-quick-reference/csc-quick-reference.pdf)</p>
 
 # Training
 
@@ -87,7 +110,7 @@ Instead, continually learn and know when to ask for help.`"
 * [CSC geoinformatics training materials](https://research.csc.fi/gis-learning-materials)
 
 <br><br>
--> follow our [training calendar](https://www.csc.fi/en/training#training-calendar)
+<p>&rarr; Follow our [training calendar](https://www.csc.fi/en/training#training-calendar)</p>
 
 # How we can help
 
@@ -97,12 +120,10 @@ Instead, continually learn and know when to ask for help.`"
 * 'Any advice how to do X?'
 * Training/example wishes
 
-<br></br>
-**<p>&rarr; servicedesk@csc.fi</p>**
-<br></br>
-**<p>&rarr; [Weekly user support coffe break](https://ssl.eventilla.com/usersupportcoffee)</p>**
-
-[Speed up your request](https://docs.csc.fi/support/support-howto/)
+<br><br>
+<p>&rarr; servicedesk@csc.fi</p>
+<p>&rarr; [Weekly user support coffe break](https://ssl.eventilla.com/usersupportcoffee)</p>
+<p>&rarr; [Speed up your request](https://docs.csc.fi/support/support-howto/)</p>
 
 
 # Supercomputer
@@ -110,13 +131,13 @@ Instead, continually learn and know when to ask for help.`"
 Main differences to own computer:
 <br><br>
 
-* Not faster, but bigger
+* Not faster, but more *
 * For speed up: runnings many experiments at same time, parallelism
 * Memory and CPU(/GPU) availability (application needs to make use of this!)
 * Non-interactive for heavy computations
 * Resource knowledge
 
-# Why use CSC supercomputer?
+# Why use CSC supercomputer Puhti?
 
 When own computer is not enough:
 <br><br>
@@ -129,14 +150,15 @@ When own computer is not enough:
 
 # Possibilities
 
-* Use more memory/CPU/GPU than your own computer has available <br>
-<br>
-<p>&rarr; analyse large files, Machine learning model training </p>
-<br>
+* Use more memory/CPU/GPU than your own computer has available <br><br>
+
+<p>&rarr; analyse large files, Machine learning model training </p><br>
+
 * Speed up so called *embarrassingly parallel* analyses (many identical, but separate tasks) <br><br>
+
 <p>&rarr; doing same thing to multiple map tiles/ data chunks </p>
 
-# Applications
+# Applications on Puhti
 
 <div class="column">
 * CloudCompare
@@ -210,7 +232,7 @@ Check [`https://docs.csc.fi/apps`](https://docs.csc.fi/apps) for module names, v
 # Puhti basics
 
 <p align="center">
-  <img src="images/puhti_overview.png" width="50%">
+  <img src="./images/puhti_overview.png" width="50%">
 </p>
 
 # Directories
@@ -229,7 +251,8 @@ Check [`https://docs.csc.fi/apps`](https://docs.csc.fi/apps) for module names, v
 * Queue for resource management system to grant resources
 * All heavy computing must be done via batch jobs!
 
-Always run small scale tests first interactively (not on login node!) or via small batch job
+<br>
+<p>&rarr;Always run small scale tests first interactively (not on login node!) or via small batch job</p>
 
 # Example sbatch script
 
@@ -248,15 +271,15 @@ Always run small scale tests first interactively (not on login node!) or via sma
 srun echo "Hello $USER! You are on node $HOSTNAME"
 ```
 <br>
-<p>&rarr; File `test_sbatch.sh` </p> <br>
+<p>&rarr; File `test_sbatch.sh` </p> 
 <p>&rarr; Submit for computation with `sbatch test_sbatch.sh` </p>
 
 # If a job fails..
 
 1. Did the job run out of memory/time?
 2. Were all resources specified correctly?
-3. Immediate fail or fail after some time?
-4. Check the error output
+3. Immediate fail or fail after some time? 
+4. Check the error output (#SBATCH --error=$SLURM_JOB_ID.err)
 5. Check software specific logs
 
 # Puhti web interface
@@ -266,7 +289,7 @@ srun echo "Hello $USER! You are on node $HOSTNAME"
 [`puhti.csc.fi`](https://puhti.csc.fi)
 
 <p align="center">
-  <img src="images/puhti_webinterface.png" width="50%">
+  <img src="./images/puhti_webinterface.png" width="50%">
 </p>
 
 # Runnings things at the same time
@@ -279,41 +302,43 @@ srun echo "Hello $USER! You are on node $HOSTNAME"
 
 # Allas
 
-* Object storage 
+* "Object storage"
 * Up to 200TB for free
 * Connected to CSC services and own computer
 * Project lifetime data storage
 * Sharing data within your CSC project
 * Looks similar, but is not a file system
+<br><br>
+<p>&rarr;Buckets - Objects</p>
 
-Buckets - Objects
+# Own project hints ans suggestions
 
-# Own project hints
-
-* Keep scripts under version control (e.g. git(hub); also simplifies collaboration and synchronising different computers)
+* Keep scripts under version control (e.g. git(hub))
 * On Puhti: 
-    * scripts and data in `/scratch/project_200xxxx/your_groupname` -> raw data, intermediate and final results
-    (in the long run, scripts are better to be kept in `/projappl/project_200xxxx` -> no automatic cleaning)
+    * Scripts and data in `/scratch/project_200xxxx/your_groupname` 
+    * Puhti webinterface / `scp` for data transfer: own computer - Puhti
+    * `wget` for data transfer:  internet - Puhti 
+    * No hardcoded filepaths such as `/my/home/dir/file.txt` in Python script
+    * Package availability: `module load geoconda` and `list-packages` ([adding Python packages for your own usage](https://docs.csc.fi/apps/python/#installing-python-packages-to-existing-modules))
 
-<br></br>
-On project organization: [CodeRefinery lesson - Reproducible research](https://coderefinery.github.io/reproducible-research/organizing-projects/)
-<br></br>
-On modular code development [CodeRefinery lesson - Modular code development](https://coderefinery.github.io/modular-type-along/instructor-guide/)
+On project organization: [CodeRefinery lesson - Reproducible research](https://coderefinery.github.io/reproducible-research/organizing-projects/)<br>
+[CodeRefinery lesson - Modular code development](https://coderefinery.github.io/modular-type-along/instructor-guide/)
 
 
 # Take-home Message
 
-* Manage your CSC services via our CSC customer portal at MyCSC
+* Manage your CSC services via our CSC customer portal at [MyCSC](https://my.csc.fi/)
 * Resources are free for open science research (academic use)
-* Participate in CSC trainings, read materials and watch webinars 
-* Take advantage of CSC docs pages
-* Contact our helpdesk for support and guidance
+* Participate in [CSC trainings](https://www.csc.fi/en/training), [read materials](https://github.com/csc-training/geocomputing) orgithub [checkout tutorials](https://docs.csc.fi/support/tutorials/) 
+* Take advantage of CSC docs pages, e.g. [Puhti batch job system documentation](https://docs.csc.fi/computing/running/getting-started/)
+* Contact our helpdesk for support and guidance: `servicedesk@csc.fi`
 
 # Want to work with us?
 
 Open temporary position in geoinformatics team with possibility for thesis work.
 
 Topics:
+
 * Python, dask
 * HPC
 * Workflows for spatial data processing
