@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=Daskexample
-#SBATCH --account=project_2001659
+#SBATCH --account=project_2007552
 #SBATCH --time=00:05:00
 #SBATCH --output out.txt
 #SBATCH --error err.txt
