@@ -1,20 +1,20 @@
 # Python Puhti examples
 
 Four different job styles: interactive, serial, array and parallel. 
-For parallel jobs there are 3 options with different Python libraries: `multiprocessing`, `joblib` and `dask`. 
+For parallel jobs there are multiple options with different Python libraries. We'll have a look at using `dask`. 
 
 Interactive:  developing your scripts,  limited test data. 
 Computationally more demanding analysis: use Puhti's batch system for requesting the resources and running your scripts. 
 
 ## Example case
 
-Calculate NDVI (Normalized Difference Vegetation Index) from the Sentinel2 satellite image's red and near infrared bands. The reading, writing and calculation of NDVI are identical in all examples (except in Dask example) and only the method of parallelisation changes (the code in the main function). 
+Calculate NDVI (Normalized Difference Vegetation Index) from the Sentinel2 satellite image's red and near infrared bands. 
 
 Basic idea behind the script is to:
 
-- Find red and near infrared channels of Sentinel L2A products from its `SAFE` folder and open the `jp2` files.
-- Read the data as `numpy` array with `rasterio`, scale the values to reflectance values and calculate NDVI index.
-- Save output as GeoTiff with `rasterio`.
+- Find red and near infrared channels of Sentinel L2A products from its `SAFE` folder and open the `jp2` files. -> `readImage`
+- Read the data as `numpy` array with `rasterio`, scale the values to reflectance values and calculate NDVI index. -> `calculateNDVI`
+- Save output as GeoTiff with `rasterio`. -> `saveImage`
 
 Files:
 
@@ -29,7 +29,7 @@ Requirements:
 - No hardcoded filepaths such as `/my/home/dir/file.txt`
 - Check package availability
 
-Find available packages on Puhti, by running `module load geoconda` and `list-packages`. If needed, you can [add Python packages for your own usage](https://docs.csc.fi/apps/python/#installing-python-packages-to-existing-modules) also yourself.
+Find available packages on Puhti, by running `module load geoconda` and `list-packages`, eg in a login node shell. If needed, you can [add Python packages for your own usage](https://docs.csc.fi/apps/python/#installing-python-packages-to-existing-modules) also yourself.
 
 Also read the [Puhti batch job system documentation](https://docs.csc.fi/computing/running/getting-started/)
 
@@ -43,7 +43,7 @@ Also read the [Puhti batch job system documentation](https://docs.csc.fi/computi
     * Create new own folder:`mkdir yyy` (fill in your user name for y)
     * Switch into your own folder: `cd yyy` (fill in your username for y)
     * Get the exercise material by cloning this repository: `git clone https://github.com/samumantha/puhti_python_example`
-	
+
 ## Interactive job
 
 Within an [interactive job](https://docs.csc.fi/computing/running/interactive-usage/) it is possible to edit the script in between test-runs; so this suits best when still writing the script. Usually it is best to use some smaller test dataset for this.
@@ -121,50 +121,14 @@ sacct -j [jobid] -o JobName,elapsed,TotalCPU,reqmem,maxrss,AllocCPUS
 
 
 ## Parallel job
-In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here examples for `multiprocessing`, `joblib` and `dask` are provided.
 
-### multiprocessing
+In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here we'll take a look at `dask`:
 
-`multiprocessing` package is likely easiest to use and in inlcuded in all Python installations by default.  `multiprocessing` is suitable for one node (max 40 cores).
 
-* [parallel_multiprocessing/multiprocessing_example.sh](parallel_multiprocessing/multiprocessing_example.sh) batch job file for `multiprocessing`.
-	* `--ntasks=1` + `--cpus-per-task=3` reserves 3 cores - one for each file
-	* `--mem-per-cpu=4G` reserves memory per core
-
-* [parallel_multiprocessing/multiprocessing_example.py](parallel_multiprocessing/multiprocessing_example.py)
-	* Note how pool of workers is started and processes divided to workers with `pool.map()`. This replaces the for loop in simple serial job.
-
-* Submit the parallel job to Puhti from Puhti login node shell:
-```
-cd ../parallel_multiprocessing
-sbatch multiprocessing_example.sh
-```
-* Check with `seff` and `sacct` how much time and resources you used?
-
-### joblib
-
-`joblib` provides some more flexibility than multiprocessing. `joblib` is suitable for one node (max 40 cores).
-
-* [parallel_joblib/joblib_example.sh](parallel_joblib/joblib_example.sh) batch job file for `joblib`.
-	* `--ntasks=1` + `--cpus-per-task=3` reserves 3 cores - one for each file
-	* `--mem-per-cpu=4G` reserves memory per core
-
-* [parallel_joblib/joblib_example.py](parallel_joblib/joblib_example.py)
-	* Note how `Parallel` incorporates the for loop of the serial job. 
-
-* Submit the parallel job to Puhti from Puhti login node shell:
-```
-cd ../parallel_joblib
-sbatch joblib_example.sh
-```
-
-* Check with `seff` and `sacct` how much time and resources you used?
 
 ### dask 
 
-`dask` is the most versatile has several options for parallelization, the examples here include both single-node (max 40 cores) and multi-node example.
-
-`dask` provides some more flexibility than multiprocessing and joblib. This example uses [delayed functions](https://docs.dask.org/en/latest/delayed.html) from Dask to parallelize the workload. Typically if a workflow contains a for-loop, it can benefit from delayed. [Dask delayed tutorial](https://tutorial.dask.org/03_dask.delayed.html)
+`dask` is versatile and has several options for parallelization, this example is for single-node (max 40 cores)- usage, but `dask` can also be used for multi-node jobs. This example uses [delayed functions](https://docs.dask.org/en/latest/delayed.html) from Dask to parallelize the workload. Typically, if a workflow contains a for-loop, it can benefit from delayed. [Dask delayed tutorial](https://tutorial.dask.org/03_dask.delayed.html)
 
 * [parallel_dask/dask_singlenode.sh](parallel_dask/dask_singlenode.sh) batch job file for `dask`.
 	* `--ntasks=1` + `--cpus-per-task=3` reserves 3 cores - one for each file
@@ -198,28 +162,7 @@ sbatch gnu_parallel_example.sh
 ```
 * Check with `seff` and `sacct` how much time and resources you used?
 
-## Array job
 
-[Array jobs](https://docs.csc.fi/computing/running/array-jobs/) are an easy way of taking advantage of Puhti's capabilities. Array jobs are useful when same code is executed many times for different datasets or with different parameters. In GIS context a typical use case would be to run some model on study area split into multiple files where output from one file doesn't have an impact on result of an other area. 
-
-In the array job example the idea is that the Python script will run one process for every given input file as opposed to running a for loop within the script. That means that the Python script has to read the file to be processed from commandline  argument. 
-
-* [array/array_job_example.sh](array/array_job_example.sh) array job batch file. Changes compared to simple serial job:
-    * `--array` parameter is used to tell how many jobs to start. Value 1-3 in this case means that `$SULRM_ARRAY_TASK_ID` variable will be from 1 to 3. With `sed` read first three lines from our `image_path_list.txt` file and start a job for each input file. 
-	* Output from each job is written to `array_job_out_<array_job_id>.txt` and `array_job_err_<array_job_id>.txt` files. 
-	* Memory and time allocations are per job.
-	* The image name is provided as an argument in the batch job script to the Python script. 
-	
-* [array/array_job_example.py](array/array_job_example.py). 
-    * Python script reads the input image file from the argument, which is set inside the batch job file. 
-	* For looped has been removed, each job calculates only one file.
-	
-* Submit the array job
-```
-cd ../array
-sbatch array_job_example.sh
-```
-* Check with `seff` and `sacct` how much time and resources you used?
 
 
 ## Notes on many small runs
