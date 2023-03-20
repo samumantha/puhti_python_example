@@ -9,7 +9,7 @@ Author: Kylli Ek, Samantha Wittke, CSC
 
 # The required packages depend on the task
 import os
-# For working with rasters
+# For working with raster data
 import rasterio
 # For working with vector data
 import geopandas as gpd
