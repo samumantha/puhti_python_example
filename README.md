@@ -23,15 +23,7 @@ Files:
     * A **.py** file for defining the tasks to be done.
     * A batch job **.sh** file for submitting the job to Puhti batch job scheduler (SLURM).
 
-## Hint: Moving from own computer to Puhti
 
-Requirements:
-- No hardcoded filepaths such as `/my/home/dir/file.txt`
-- Check package availability
-
-Find available packages on Puhti, by running `module load geoconda` and `list-packages`, eg in a login node shell. If needed, you can [add Python packages for your own usage](https://docs.csc.fi/apps/python/#installing-python-packages-to-existing-modules) also yourself.
-
-Also read the [Puhti batch job system documentation](https://docs.csc.fi/computing/running/getting-started/)
 
 ## Let's get started 
 ### Get example scripts to Puhti
