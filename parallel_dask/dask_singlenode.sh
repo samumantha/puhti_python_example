@@ -1,7 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=DaskMulticore
+#SBATCH --job-name=Daskexample
 #SBATCH --account=project_2001659
 #SBATCH --time=00:05:00
+#SBATCH --output out.txt
+#SBATCH --error err.txt
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=3
 #SBATCH --mem-per-cpu=4G

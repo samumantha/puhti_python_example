@@ -23,8 +23,6 @@ Files:
     * A **.py** file for defining the tasks to be done.
     * A batch job **.sh** file for submitting the job to Puhti batch job scheduler (SLURM).
 
-
-
 ## Let's get started 
 ### Get example scripts to Puhti
 
@@ -35,6 +33,8 @@ Files:
     * Create new own folder:`mkdir yyy` (fill in your user name for y)
     * Switch into your own folder: `cd yyy` (fill in your username for y)
     * Get the exercise material by cloning this repository: `git clone https://github.com/samumantha/puhti_python_example`
+    * Switch to the directory with example files: `cd puhti_python_example`.
+    * Check that we are in the correct place: `pwd` should show something like `/scratch/project_200xxxx/yyy/puhti_python_example`.
 
 ## Interactive job
 
@@ -82,13 +82,22 @@ If you prefer working in the terminal, you can also start an interactive job the
 * Local disk: 0
 * Time: 2:00:00
 
-You can also start an [interactive session](https://docs.csc.fi/computing/running/interactive-usage/) by starting a login node shell from Tools tab in Puhti webinterface or by connecting to Puhti via ssh connection with `sinteractive --account project_200xxxx --cores 1 --time 02:00:00 --mem 4G --tmp 0`.
+You can also start an [interactive session](https://docs.csc.fi/computing/running/interactive-usage/) by starting a login node shell from Tools tab in Puhti webinterface or by connecting to Puhti via ssh connection with `sinteractive --account project_200xxxx --cores 1 --time 02:00:00 --mem 4G --tmp 0`. Which gives you a compute node shell (you can see "where" you are from your terminal prompt [<username>@puhti-loginXX] -> login node, [<username>@r18c03] (or some other numbers) -> compute node). 
+
+For both of above:
+
+After getting access to the compute node shell, you can load modules and run scripts "like on a normal linux computer", excluding graphical access.
+```
+module load geoconda
+python interactive_example.py /appl/data/geo/sentinel/s2_example_data/L2A
+```
 
 
 ## Serial job
-For simple 1 core batch job, use the same Python-script as for interactive working. Now we have to move to the terminal.
 
-* Open [serial/single_core_example.sh](erial/serial_batch_job.sh). Where are output and error messages written? How many cores and for how long time are reserved? How much memory? Which partition is used? Which module is used?
+For a one core batch job, use the same Python-script as for interactive working. **Latest now, we have to move to the terminal.**
+
+* Open [serial_job/single_core_example.sh](serial_job/serial_batch_job.sh). Where are output and error messages written? How many cores and for how long time are reserved? How much memory? Which partition is used? Which module is used?
 * Submit batch job from **login node shell**
 ```
 cd /scratch/project_200xxxx/yyy/puhti_python_example/serial
@@ -115,8 +124,6 @@ sacct -j [jobid] -o JobName,elapsed,TotalCPU,reqmem,maxrss,AllocCPUS
 ## Parallel job
 
 In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here we'll take a look at `dask`:
-
-
 
 ### dask 
 
@@ -155,8 +162,6 @@ sbatch gnu_parallel_example.sh
 * Check with `seff` and `sacct` how much time and resources you used?
 
 
-
-
 ## Notes on many small runs
 
 "Too many files" issues are also often encountered with workflows consisting of thousands of small runs. As a general guide, keep the number of files in a single directory well below one thousand, and organize your data into multiple directories. Also, use command csc-workspaces to monitor that the total number of files in your projects stays well below the limits. If most of the files are temporary, or there simply is too many of them, using the fast local SSD disks in the I/O nodes can solve the problem. You can pack small files into a bigger archive file with the tar command. Most importantly, if there are output files that you do not need, find out how to turn off writing those in the first place.
@@ -167,9 +172,9 @@ These are just to demonstrate the difference between single core vs. some kind o
 
 | Example         | Jobs | CPU cores / job | Time (min) | CPU efficiency |
 |-----------------|------|-----------------|------------|----------------|
-| single core     | 1    | 1               | 03:23      | 86.70%         |
+| single core     | 1    | 1               | 02:54      | 86.70%         |
 | multiprocessing | 1    | 3               | 01:05      | 92.31%         |
 | joblib          | 1    | 3               | 01:12      | 86.57%         |
-| dask            | 1    | 3               | 01:22      | 78.46%         |
+| dask            | 1    | 3               | 01:01      | 78.46%         |
 | array job       | 3    | 1               | 01:03      | 95.16%         |
-| GNU parallel    | 1    | 3               | xxx        | xxxx           |
+| GNU parallel    | 1    | 3               | 00:55      | 15.15%        |
