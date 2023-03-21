@@ -1,6 +1,8 @@
 # Python Puhti examples
 
-Four different job styles: interactive, serial, array and parallel. 
+This is an adapted version of [Geocomputing Python Puhti examples](https://github.com/csc-training/geocomputing/tree/master/python/puhti) for Aalto project course workshop in March 2023.
+
+Three different job styles: interactive, serial, and parallel. 
 For parallel jobs there are multiple options with different Python libraries. We'll have a look at using `dask`. 
 
 Interactive:  developing your scripts,  limited test data. 
@@ -113,7 +115,6 @@ seff [jobid]
 ```
 sacct -j [jobid] -o JobName,elapsed,TotalCPU,reqmem,maxrss,AllocCPUS
 ```
-
 	- elapsed – time used by the job
 	- TotalCPU – time used by all cores together
 	- reqmem – amount of requested memory
@@ -123,7 +124,7 @@ sacct -j [jobid] -o JobName,elapsed,TotalCPU,reqmem,maxrss,AllocCPUS
 
 ## Parallel job
 
-In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here we'll take a look at `dask`:
+In this case the Python code takes care of dividing the work to 3 processes, one for each input file. Python has several packages for code parallelization, here we'll take a look at `dask` (for others, check [Geocomputing multiporcessing example](https://github.com/csc-training/geocomputing/tree/master/python/puhti/03_parallel_multiprocessing) and [Geocomputing joblib example](https://github.com/csc-training/geocomputing/tree/master/python/puhti/03_parallel_joblib) ):
 
 ### dask 
 
@@ -149,7 +150,7 @@ sbatch dask_singlenode.sh
 
 GNU parallel can help parallelizing a script which otherwise is not parallelized. In this example we want to run the same script on three different inputfiles which we can read into a textfile and use as argument to the parallel tool.
 
-This is similar to array jobs (see below), with the advantage that we do not start and need to monitor multiple jobs.
+This is similar to array jobs (see [Geocomputing array job example](https://github.com/csc-training/geocomputing/tree/master/python/puhti/02_array)), with the advantage that we do not start and need to monitor multiple jobs.
 
 [gnu_parallel/gnu_parallel_example.sh](gnu_parallel/gnu_parallel_example.sh).
 The only difference to serial job is that we do not loop through the directory inside the Python script but let GNU parallel handle that step.
