@@ -7,30 +7,39 @@ adapted from https://docs.csc.fi/img/csc-quick-reference/csc-quick-reference.pdf
 * Pouta, Rahti - cloud services
 * Allas - object storage
 
-## Unix commands
+## Unix commands and hints
 (all text within <> is replaced with real names, e.g. `cp /home/user/my-file.txt scratch/project_200xxxx/new-directory`)
 Check out all options of the commands with `man <command>` (for *man*ual), exit with `q`.
 
+### File system exploration
 * `ls` - list current directory contents
-* `cp <file-to-copy> <destination>` - copy a file 
-* `mv <file-to-move> <destination/new-file-name>` - move or rename a file 
-* `rm <file-to-remove>` - delete a file 
 * `cd <directory-to-change-to>` - change the current directory
     * `cd ..` - change to "one level higher" in directory tree
     * `cd` - (without argument) change to $HOME 
 * `pwd` - print full path of the current directory
+
+### File manipulation
+* `cp <file-to-copy> <destination>` - copy a file 
+* `mv <file-to-move> <destination/new-file-name>` - move or rename a file 
+* `rm <file-to-remove>` - delete a file 
 * `mkdir <new-directory-name>` - create a directory
 * `touch <new-file-name>` - create an empty new file
+
+### Permissions
 * `chmod <whowhatwhich> <file-name>` - change file permissions 
     * who -> u: user , g: group , o: others, a: all
     * what -> -:remove permission, +: add permission
     * which -> r: read, w: write, x: execute
     * example `chmod u+x my-batch-job-script.sh` adds execution rights for current user to the file
 * `chgrp` - change file/folder owner
+
+### Check file contents
 * `less <text-file>` - see text file (exit with `q`)
 * `cat <file-name>` - see file content
 * `head <file-name>` - list ten first lines of the file 
 * `tail -100 <file-name>` - show the last 100 lines 
+
+### Other
 * `history` - show history of commands run
 * `grep` - find rows containing a string
     * example: `history | grep "some strings"` would show you all commands in your history that contain "some string" (| is called a pipe)
@@ -38,6 +47,16 @@ Check out all options of the commands with `man <command>` (for *man*ual), exit 
 * `exit` - quit the session on commandline 
 * `<some command> > <file-name>` - output of a command to a file 
 * `<some command> >> <file-name>` - append output of a command to a file
+* `which <application-name>` - shows path to the executable of an application
+
+Defining a variable: `MYPATH=/home/user/something`
+Using a defined or environment (predefined!) variable: `$MYPATH`, e.g. to print its content: `echo $MYVAR`
+Some environment variables:
+* `$HOME` : users home directory
+* `$PATH` : path where executables are looked for
+* `$USERNAME`: current username
+* `$HOSTNAME`: current host system name
+
 
 ## Command line editors 
 
@@ -59,7 +78,7 @@ Process to edit a file in vi:
 
 ## File transfer
 
-* `scp <file name> <username@puhti.csc.fi:/scratch/project_200xxxx/dir_name>` - copy a file from one computer to another, here: to Puhti
+* `scp <file name> <username@puhti.csc.fi:/scratch/project_200xxxx/dir_name>` - copy a file from current computer to Puhti
 * `wget <some-url>` or  `curl <some-url>` - get a file from the internet
 
 ## CSC modules
