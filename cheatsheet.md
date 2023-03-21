@@ -1,5 +1,6 @@
 # CSC and Unix cheatsheet
 adapted from https://docs.csc.fi/img/csc-quick-reference/csc-quick-reference.pdf
+Note that this is simplified for beginners usage, once you get more experienced, you'll notice that there is more (and better) options for everything, and that not everything written here is "the whole truth".
 
 ## Service names
 
@@ -49,6 +50,8 @@ Check out all options of the commands with `man <command>` (for *man*ual), exit 
 * `<some command> >> <file-name>` - append output of a command to a file
 * `which <application-name>` - shows path to the executable of an application
 
+
+### Variables
 Defining a variable: `MYPATH=/home/user/something`
 Using a defined or environment (predefined!) variable: `$MYPATH`, e.g. to print its content: `echo $MYVAR`
 Some environment variables:
