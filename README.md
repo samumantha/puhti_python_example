@@ -175,6 +175,10 @@ sbatch gnu_parallel_example.sh
 
 See `allas_from_python.py` for examples.
 
+### from Webinterface
+
+https://pouta.csc.fi/dashboard
+-> might need Pouta access via project
 
 ## Notes on many small runs
 
