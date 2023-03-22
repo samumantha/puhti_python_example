@@ -162,6 +162,19 @@ sbatch gnu_parallel_example.sh
 ```
 * Check with `seff` and `sacct` how much time and resources you used?
 
+## Using Allas
+
+`module load allas`
+`allas-conf --mode s3cmd`
+
+### from command line
+
+`s3cmd <command>`
+
+### from Python
+
+See `allas_from_python.py` for examples.
+
 
 ## Notes on many small runs
 
@@ -169,7 +182,7 @@ sbatch gnu_parallel_example.sh
 
 ## Example benchmarks 
 
-These are just to demonstrate the difference between single core vs. some kind of parallelism. Depending on the issue, some library might be faster or slower.
+These are just to demonstrate the difference between single core sequential vs. some kind of parallelism. Depending on the issue, some library might be faster or slower.
 
 | Example         | Jobs | CPU cores / job | Time (min) | CPU efficiency |
 |-----------------|------|-----------------|------------|----------------|
@@ -178,4 +191,4 @@ These are just to demonstrate the difference between single core vs. some kind o
 | joblib          | 1    | 3               | 01:12      | 86.57%         |
 | dask            | 1    | 3               | 01:01      | 78.46%         |
 | array job       | 3    | 1               | 01:03      | 95.16%         |
-| GNU parallel    | 1    | 3               | 00:55      | 15.15%        |
+| GNU parallel    | 1    | 3               | 00:55      | 15.15%         |
