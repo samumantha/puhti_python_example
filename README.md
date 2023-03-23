@@ -164,16 +164,20 @@ sbatch gnu_parallel_example.sh
 
 ## Using Allas
 
+Before using Allas from Puhti we need to load the tools and configure the connection:
+
 `module load allas`
 `allas-conf --mode s3cmd`
 
 ### from command line
 
+Using `s3cmd`, you can find all commands in bottom of this page: https://s3tools.org/usage
+
 `s3cmd <command>`
 
 ### from Python
 
-See `allas_from_python.py` for examples.
+See `allas_from_python.py` for some examples.
 
 ### from Webinterface
 
@@ -182,7 +186,7 @@ https://pouta.csc.fi/dashboard
 
 ## Notes on many small runs
 
-"Too many files" issues are also often encountered with workflows consisting of thousands of small runs. As a general guide, keep the number of files in a single directory well below one thousand, and organize your data into multiple directories. Also, use command csc-workspaces to monitor that the total number of files in your projects stays well below the limits. If most of the files are temporary, or there simply is too many of them, using the fast local SSD disks in the I/O nodes can solve the problem. You can pack small files into a bigger archive file with the tar command. Most importantly, if there are output files that you do not need, find out how to turn off writing those in the first place.
+"Too many files" issues are also often encountered with workflows consisting of thousands of small runs. As a general guide, keep the number of files in a single directory well below one thousand, and organize your data into multiple directories. Also, use command `csc-workspaces` to monitor that the total number of files in your projects stays well below the limits. If most of the files are temporary, or there simply is too many of them, using the fast local SSD disks (NVMe) in the I/O nodes can solve the problem. You can pack small files into a bigger archive file with the `tar` command. Most importantly, if there are output files that you do not need, find out how to turn off writing those in the first place.
 
 ## Example benchmarks 
 
