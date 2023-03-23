@@ -154,9 +154,36 @@ When own computer is not enough:
 
 <p>&rarr; analyse large files, Machine learning model training </p><br>
 
-* Speed up so called *embarrassingly parallel* analyses (many identical, but separate tasks) <br><br>
+* Speed up so called *embarrassingly/naturally/delightfully parallel* analyses (many identical, but separate tasks) <br><br>
 
 <p>&rarr; doing same thing to multiple map tiles/ data chunks </p>
+
+# Data available on CSC supercomputer Puhti
+
+<div class="column">
+
+* Large commonly used geospatial datasets with open license
+* Removes transfer bottleneck
+* Located at: `/appl/data/geo/`
+* All Puhti users have read access
+
+</div>
+<div class="column">
+
+* ~13 TB of datasets available:
+  * Paituli data 
+  * SYKE open datasets
+  * LUKE Multi-source national forest inventory
+  * NLS Virtual rasters for DEMs
+  * Sentinel and Landsat mosaics
+
+</div>
+
+<br>
+
+<div>
+[List of spatial data in computing environment](https://docs.csc.fi/data/datasets/spatial-data-in-csc-computing-env/)
+</div>
 
 # Applications on Puhti
 
@@ -202,32 +229,6 @@ before every application use to make application available.
 
 Check [`https://docs.csc.fi/apps`](https://docs.csc.fi/apps) for module names, versions and possible CSC specifics.
 
-# Data available on CSC supercomputer Puhti
-
-<div class="column">
-
-* Large commonly used geospatial datasets with open license
-* Removes transfer bottleneck
-* Located at: `/appl/data/geo/`
-* All Puhti users have read access
-
-</div>
-<div class="column">
-
-* ~13 TB of datasets available:
-  * Paituli data 
-  * SYKE open datasets
-  * LUKE Multi-source national forest inventory
-  * NLS Virtual rasters for DEMs
-  * Sentinel and Landsat mosaics
-
-</div>
-
-<br>
-
-<div>
-[List of spatial data in computing environment](https://docs.csc.fi/data/datasets/spatial-data-in-csc-computing-env/)
-</div>
 
 # Puhti basics
 
@@ -242,6 +243,16 @@ Check [`https://docs.csc.fi/apps`](https://docs.csc.fi/apps) for module names, v
 * $HOME – most important (small) files, personal access only
 * $PROJAPPL – project specific / your installations/ shared binaries
 * $SCRATCH – main working area, can be used to share with project members
+
+# Puhti web interface
+
+<p>&rarr; Check your data, testing, code development, file management, quotas, graphical applications </p>
+
+[`puhti.csc.fi`](https://puhti.csc.fi)
+
+<p align="center">
+  <img src="./images/puhti_webinterface.png" width="50%">
+</p>
 
 # Jobs and queueing 
 
@@ -282,15 +293,6 @@ srun echo "Hello $USER! You are on node $HOSTNAME"
 4. Check the error output (#SBATCH --error=$SLURM_JOB_ID.err)
 5. Check software specific logs
 
-# Puhti web interface
-
-<p>&rarr; Check your data, testing, code development, file management, quotas, graphical applications </p>
-
-[`puhti.csc.fi`](https://puhti.csc.fi)
-
-<p align="center">
-  <img src="./images/puhti_webinterface.png" width="50%">
-</p>
 
 # Runnings things at the same time
 
@@ -298,7 +300,8 @@ srun echo "Hello $USER! You are on node $HOSTNAME"
 <p>&rarr;  GNU parallel, array jobs, other workflow tools </p>
 * within python script
 <p>&rarr; dask, multiprocessing, joblib, ... </p>
-
+<br>
+Note: Not everything is parallelizable! Some steps might have to happen after others finished successfully. It is also possible to parallelize only part of your workflow.
 
 # Allas
 
@@ -311,7 +314,7 @@ srun echo "Hello $USER! You are on node $HOSTNAME"
 <br><br>
 <p>&rarr;Buckets - Objects</p>
 
-# Own project hints ans suggestions
+# Own project hints and suggestions
 
 * Keep scripts under version control (e.g. git(hub))
 * On Puhti: 

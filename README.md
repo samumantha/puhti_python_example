@@ -2,8 +2,8 @@
 
 This is an adapted version of [Geocomputing Python Puhti examples](https://github.com/csc-training/geocomputing/tree/master/python/puhti) for Aalto project course workshop in March 2023.
 
-Three different job styles: interactive, serial, and parallel. 
-For parallel jobs there are multiple options with different Python libraries. We'll have a look at using `dask`. 
+Three different job styles: interactive, serial, and embarrasingly/delightfully/naturally parallel. 
+For parallel jobs there are multiple options with different command line / workload manager tools or Python libraries. We'll have a look at using `GNUParallel` and `dask`. 
 
 Interactive:  developing your scripts,  limited test data. 
 Computationally more demanding analysis: use Puhti's batch system for requesting the resources and running your scripts. 
@@ -63,12 +63,11 @@ With Visual Studio Code you can also just run parts of the script.
     * File -> Open folder -> `/scratch/project_200xxxx/yyy/geocomputing/python/puhti` -> OK
 * Open [serial/single_core_example.py](serial/single_core_example.py). This is basic Python script, which uses a **for loop** for going through all 3 files.  
 * Check that needed Python libraries are available in Puhti. If it is not your own script you can see which libraries are used in this script by checking the imports. To check whether those libraries are available: Select all import rows and press `Shift+Enter`. Wait a few seconds. The import commands are run in Terminal (which opens automatically on the bottom of the page). If no error messages are visible, the packages are available. Also other parts of the script can be tested in the same manner (select the code and run with `Shift+Enter`).
-* Optional, for more advanced options for running Python code in VSCode, see for example [VSCode's Python Interactive mode is AMAZING!](https://www.youtube.com/watch?v=lwN4-W1WR84) and [How to Debug Python with VSCode](https://www.youtube.com/watch?v=w8QHoVam1-I&t=19s) videos.
 * Run the full script: 
     * Exit Python console in Terminal: type `exit()` in the terminal
     * Click green arrow above script (Run Python File in Terminal)
     * Wait, it takes a few minutes for complete. The printouts will appear during the process.
-    * Check that there are 3 new GeoTiff files in your work directory in the Files panel of VSCode.
+    * Check that there are 3 new GeoTiff files in your outout directory in the Files panel of VSCode.
 * Optional, check your results with [QGIS](https://docs.csc.fi/apps/qgis/)
 
 ### Jupyter
@@ -84,7 +83,7 @@ If you prefer working in the terminal, you can also start an interactive job the
 * Local disk: 0
 * Time: 2:00:00
 
-You can also start an [interactive session](https://docs.csc.fi/computing/running/interactive-usage/) by starting a login node shell from Tools tab in Puhti webinterface or by connecting to Puhti via ssh connection with `sinteractive --account project_200xxxx --cores 1 --time 02:00:00 --mem 4G --tmp 0`. Which gives you a compute node shell (you can see "where" you are from your terminal prompt [<username>@puhti-loginXX] -> login node, [<username>@r18c03] (or some other numbers) -> compute node). 
+You can also start an [interactive session](https://docs.csc.fi/computing/running/interactive-usage/) by starting a login node shell from Tools tab in Puhti webinterface or by connecting to Puhti via ssh connection with `sinteractive --account project_200xxxx --cores 1 --time 02:00:00 --mem 4G --tmp 0`. Which gives you a compute node shell (you can see "where" you are from your terminal prompt [<username>@puhti-loginXX] -> login node, [<username>@rXXcXX] (XX being some numbers) -> compute node). 
 
 For both of above:
 
@@ -93,7 +92,6 @@ After getting access to the compute node shell, you can load modules and run scr
 module load geoconda
 python interactive_example.py /appl/data/geo/sentinel/s2_example_data/L2A
 ```
-
 
 ## Serial job
 
@@ -143,7 +141,7 @@ cd ../parallel_dask
 sbatch dask_singlenode.sh
 ```
 
-* Check with `seff` and `sacct` how much time and resources you used?
+* Check with `seff` how much time and resources you used?
 
 
 ## GNU parallel
@@ -155,12 +153,14 @@ This is similar to array jobs (see [Geocomputing array job example](https://gith
 [gnu_parallel/gnu_parallel_example.sh](gnu_parallel/gnu_parallel_example.sh).
 The only difference to serial job is that we do not loop through the directory inside the Python script but let GNU parallel handle that step.
 
+> To get to know how many `cpus-per-task` we need you can use for example `ls /appl/data/geo/sentinel/s2_example_data/L2A | wc -l` to count everything within the data directory before writing the batch job script. 
+
 Submit the gnu_parallel job
 ```
 cd ../gnu_parallel
 sbatch gnu_parallel_example.sh
 ```
-* Check with `seff` and `sacct` how much time and resources you used?
+* Check with `seff` how much time and resources you used?
 
 ## Using Allas
 
