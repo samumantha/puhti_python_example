@@ -182,7 +182,12 @@ See `allas_from_python.py` for some examples.
 ### from Webinterface
 
 https://pouta.csc.fi/dashboard
--> might need Pouta access via project
+-> object store -> containers
+(might need Pouta access via project?)
+
+### Making things public
+
+You can make single buckets publicly available via the internet, everyone can then access the files within a bucket, such as [todays presentation](https://a3s.fi/2007552_CSC_presentation/Aalto_py_23.html#/). 
 
 ## Notes on many small runs
 
